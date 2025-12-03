@@ -1,28 +1,49 @@
 import pytest
-# TODO: add necessary import
+from sklearn.ensemble import RandomForestClassifier
+from ml.model import inference, train_model, compute_model_metrics
+import numpy as np
 
 # TODO: implement the first test. Change the function name and input as needed
-def test_one():
+def test_inference():
     """
-    # add description for the first test
+    Test that inference() returns predictions that are valid labels
     """
-    # Your code here
-    pass
+    X = np.random.rand(800, 8)
+    y = np.random.randint(0, 2, size=800)
+    model = RandomForestClassifier(random_state=100).fit(X, y)
+
+    preds = inference(model, np.random.rand(160, 8))
+
+    assert all(p in model.classes_ for p in preds)
+    
 
 
 # TODO: implement the second test. Change the function name and input as needed
-def test_two():
+def test_train_model():
     """
-    # add description for the second test
+    Test that a random forest classifier is returned and it had data fit to it
     """
-    # Your code here
-    pass
+    # Generate random data sample
+    X = np.random.rand(800, 8)
+    y = np.random.randint(0, 2, size=800)
+    test_model = train_model(X, y)
+
+    assert isinstance(test_model, RandomForestClassifier)  
+    
+    # trained/fit models will have the feature_importances_ method
+    assert hasattr(test_model, "feature_importances_")
 
 
 # TODO: implement the third test. Change the function name and input as needed
-def test_three():
+def test_compute_model_metrics():
     """
-    # add description for the third test
+    Test to ensure compute_model_metrics returns floats
     """
-    # Your code here
-    pass
+    real = [1, 1, 1, 0, 0, 1]
+    pred = [1, 1, 1, 1, 1, 1]
+
+    p, r, fb = compute_model_metrics(real, pred)
+
+    assert isinstance(p, float)
+    assert isinstance(r, float)
+    assert isinstance(fb, float)
