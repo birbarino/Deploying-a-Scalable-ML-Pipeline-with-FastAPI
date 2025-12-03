@@ -6,16 +6,16 @@ import numpy as np
 # TODO: implement the first test. Change the function name and input as needed
 def test_inference():
     """
-    Test that inference() returns predictions that are valid labels
+    Test that inference() returns valid label predictions
     """
     X = np.random.rand(800, 8)
     y = np.random.randint(0, 2, size=800)
     model = RandomForestClassifier(random_state=100).fit(X, y)
 
     preds = inference(model, np.random.rand(160, 8))
+    valid_preds = np.array([p in model.classes_ for p in preds])
 
-    assert all(p in model.classes_ for p in preds)
-    
+    assert valid_preds.all()
 
 
 # TODO: implement the second test. Change the function name and input as needed
