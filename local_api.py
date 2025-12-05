@@ -1,14 +1,12 @@
-import json
-
 import requests
 
-# TODO: send a GET using the URL http://127.0.0.1:8000
-r = None # Your code here
+site = "http://127.0.0.1:8000"
 
-# TODO: print the status code
-# print()
-# TODO: print the welcome message
-# print()
+# See if the FastAPI server is up and ready
+r = requests.get(site)
+
+print("Status Code:", r.status_code)
+print("Welcome Message:", r.json()["message"])
 
 
 
@@ -29,10 +27,8 @@ data = {
     "native-country": "United-States",
 }
 
-# TODO: send a POST using the data above
-r = None # Your code here
+# Send data to API to get an inference
+r = requests.post(url=f"{site}/model", json=data)
 
-# TODO: print the status code
-# print()
-# TODO: print the result
-# print()
+print("Status Code:", r.status_code)
+print("Inference:", r.json()["result"])
