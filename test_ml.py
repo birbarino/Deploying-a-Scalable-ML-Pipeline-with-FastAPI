@@ -3,7 +3,6 @@ from sklearn.ensemble import RandomForestClassifier
 from ml.model import inference, train_model, compute_model_metrics
 import numpy as np
 
-# TODO: implement the first test. Change the function name and input as needed
 def test_inference():
     """
     Test that inference() returns valid label predictions
@@ -17,8 +16,6 @@ def test_inference():
 
     assert valid_preds.all()
 
-
-# TODO: implement the second test. Change the function name and input as needed
 def test_train_model():
     """
     Test that a random forest classifier is returned and it had data fit to it
@@ -33,8 +30,6 @@ def test_train_model():
     # trained/fit models will have the feature_importances_ method
     assert hasattr(test_model, "feature_importances_")
 
-
-# TODO: implement the third test. Change the function name and input as needed
 def test_compute_model_metrics():
     """
     Test to ensure compute_model_metrics returns floats
